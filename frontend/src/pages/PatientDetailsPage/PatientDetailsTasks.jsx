@@ -17,6 +17,12 @@ import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import useGet from '../../hooks/useGet';
+
+const TASK_ICONS = {
+    0: <HourglassEmptyIcon />,
+    1: <HourglassFullIcon />,
+};
+
 const style = {
     width: '100%',
     maxWidth: 360,
@@ -24,14 +30,14 @@ const style = {
     position: 'relative',
     left: '300px',
 };
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '';
 export default function PateintDetailsTasks() {
     const { patientId } = useParams();
-    const taskData = useGet(
+    const tasksArray = useGet(
         `${API_BASE_URL}/api/task/patient/${patientId}`,
         []
     );
-    console.log('taskData', taskData);
 
     return (
         <Card>
@@ -41,24 +47,15 @@ export default function PateintDetailsTasks() {
                 </Typography>
 
                 <List component='nav' aria-label='mailbox folders'>
-                    <ListItem button>
-                        <ListItemText primary='blood' />
-                        <HourglassEmptyIcon />
-                    </ListItem>
-                    <Divider />
-                    <ListItem button divider>
-                        <ListItemText primary='X-ray' />
-                        <HourglassFullIcon />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText primary='xindiantu' />
-                        <HourglassEmptyIcon />
-                    </ListItem>
-                    <Divider light />
-                    <ListItem button>
-                        <ListItemText primary='Bchao' />
-                        <HourglassTopIcon />
-                    </ListItem>
+                    {tasksArray.data.map((task, index) => (
+                        <React.Fragment key={index}>
+                            <ListItem button>
+                                <ListItemText primary={task.name} />
+                                {TASK_ICONS[task.status]}
+                            </ListItem>
+                            <Divider />
+                        </React.Fragment>
+                    ))}
                 </List>
             </CardContent>
         </Card>

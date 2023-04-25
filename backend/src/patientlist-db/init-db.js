@@ -23,7 +23,6 @@ async function run() {
     await addTeam();
     await addTasks();
     await addNotification();
-    await addTask();
 
     await mongoose.disconnect();
     console.log('Done!');
