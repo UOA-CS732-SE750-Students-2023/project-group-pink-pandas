@@ -1,4 +1,4 @@
-import { Task } from "../patientlist-db/schema";
+import { Task } from '../patientlist-db/schema';
 import dayjs from 'dayjs';
 
 async function retrieveTasks() {
@@ -9,18 +9,20 @@ async function retrieveTask(id) {
     return await Task.findById(id);
 }
 
-async function updateTask(task) {
+async function retrieveTasksByPatientId(id) {
+    return await Task.find({ patient: ObjectId(id) });
+}
 
+async function updateTask(task) {
     const dbTask = await Task.findById(task._id);
     if (dbTask) {
-
         dbTask.name = task.name;
         dbTask.type = task.type;
         dbTask.patient = task.patient;
         dbTask.clinician = task.clinician;
         dbTask.priority = task.priority;
         dbTask.status = task.status;
-   
+
         await dbTask.save();
         return true;
     }
@@ -36,5 +38,6 @@ export {
     retrieveTasks,
     retrieveTask,
     updateTask,
-    deleteTask
-}
+    deleteTask,
+    retrieveTasksByPatientId,
+};
