@@ -12,7 +12,7 @@ export const AppContext = React.createContext({
   tasksCompleted: [],
   patientList: [],
   clinicianList: [],
-  team: {},
+  team: [],
   userProfile: {},
   unreadNotification: [],
 });
@@ -26,6 +26,7 @@ export function AppContextProvider({ children }) {
   useEffect(() => {
     if (loggedInUser) {
       console.log("loggedInUser:", loggedInUser);
+      
       setClinicianId(loggedInUser._id);
     }
   }, [loggedInUser]);
@@ -193,19 +194,26 @@ export function AppContextProvider({ children }) {
     data: patientList,
     isLoading: patientListLoading,
     refresh: refreshPatientList,
-  } = useGet(`${API_BASE_URL}/api/team/1/patient_list`, []);
+  // } = useGet(`${API_BASE_URL}/api/team/1/patient_list`, []);
+} = useGet(loggedInUser?`${API_BASE_URL}/api/team/${loggedInUser.team}/patient_list`: [], []);
+if (loggedInUser) {
+  // console.log("loggedInUser:", loggedInUser);
+  // console.log("loggedInUser.team:", loggedInUser.team);
+}
 
-  const {
-    data: clinicianList,
-    isLoading: clinicianListLoading,
-    refresh: refreshClinicianList,
-  } = useGet(`${API_BASE_URL}/api/team/1/clinician_list`, []);
+//   const {
+//     data: clinicianList,
+//     isLoading: clinicianListLoading,
+//     refresh: refreshClinicianList,
+//   // } = useGet(`${API_BASE_URL}/api/team/1/clinician_list`, []);
+// } = useGet(loggedInUser?`${API_BASE_URL}/api/team/${loggedInUser.team}/clinician_list`: [], []);
 
   const {
     data: team,
     isLoading: teamLoading,
     refresh: refreshTeam,
-  } = useGet(`${API_BASE_URL}/api/team/1`, []);
+  // } = useGet(`${API_BASE_URL}/api/team/1`, []);
+} = useGet(loggedInUser?`${API_BASE_URL}/api/team/${loggedInUser.team}`: [], []);
 
 
   async function createContainer(id, container_id) {
@@ -261,8 +269,8 @@ export function AppContextProvider({ children }) {
     tasksCompleted,
     patientList,
     patientListLoading,
-    clinicianList,
-    clinicianListLoading,
+    // clinicianList,
+    // clinicianListLoading,
     team,
     teamLoading,
     userProfile,

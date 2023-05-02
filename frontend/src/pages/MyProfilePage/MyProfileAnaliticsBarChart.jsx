@@ -220,7 +220,7 @@ function formatBarChartData(tasksCompleted) {
     }
 
     const types = ["Blood Test", "Radiology", "Reviews", "Discharge", "Other"];
-    //map tasks to update data
+    
     tasksCompleted.map(task => {
         if (!task) return;
 
