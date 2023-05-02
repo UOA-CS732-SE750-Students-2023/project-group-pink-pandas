@@ -3,22 +3,10 @@ import { Box, Paper, Grid, styled, Typography, Divider } from '@mui/material';
 import PatientList from './PatientList';
 import TeamPerformance from './TeamPerformance';
 import Users from './Users';
-// import TeamDetails from './TeamDetails';
 import { useContext, useEffect } from 'react';
 import { AppContext } from '../../utils/AppContextProvider';
 import TeamMemgerTable from './TeamMemberTable.jsx';
 
-
-
-
-
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-}));
 
 
 
@@ -36,38 +24,26 @@ export default function MyTeamGrid() {
 
     if (team) {
 
+        console.log("team: ", team);
         useEffect(() => {
 
             setClinicianList(team.clinicians);
 
             setPatientList(team.patients);
 
+            console.log("team.patients: ", team.patients);
+            console.log("team.clinicians: ", team.clinicians);
+
         }, [team])
 
     }
-
-    // if (tasks) {
-
-    //     const tempTasks = tasks.filter(task => task.status === 2);
-
-    //     useEffect(() => {
-    //         setCompletedTasks(tempTasks);
-    
-    //     },[tasks])
-
-    // }
 
 
 
 
     if (tasks && team) {
 
-        const tempTasks = tasks.filter(task => task.status === 2 && task.clinician.team === team._id);
-
-        // tasks.map(task => console.log(" task.clinician.team: ", task.clinician.team ));
-
-        
-    
+        const tempTasks = tasks.filter(task => task.status === 2 && task.clinician.team === team._id);    
 
         useEffect(() => {
             setCompletedTasks(tempTasks);
@@ -120,3 +96,13 @@ export default function MyTeamGrid() {
         );
     }
 }
+
+
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+}));
+

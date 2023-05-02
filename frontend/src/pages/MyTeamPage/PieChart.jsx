@@ -13,7 +13,7 @@ export default function PieChart({ completedTasks, clinicianList }) {
         data = formatPieChartData(completedTasks, clinicianList);
     }
 
-    console.log("data:", data);
+    console.log('data:', data);
 
 
     return (
@@ -36,7 +36,7 @@ export default function PieChart({ completedTasks, clinicianList }) {
                 ]
             }}
             arcLinkLabelsSkipAngle={10}
-            arcLinkLabelsTextColor="#333333"
+            arcLinkLabelsTextColor='#333333'
             arcLinkLabelsThickness={2}
             arcLinkLabelsColor={{ from: 'color' }}
             arcLabelsSkipAngle={10}
@@ -60,7 +60,7 @@ function formatPieChartData(tasksCompleted, clinicianList) {
 
 
 
-    const colors = ["hsl(124, 70%, 50%)", "hsl(180, 70%, 50%)", "hsl(46, 70%, 50%)", "hsl(92, 70%, 50%)", "hsl(153, 70%, 50%)", "hsl(153, 70%, 50%)"]
+    const colors = ['hsl(124, 70%, 50%)', 'hsl(180, 70%, 50%)', 'hsl(46, 70%, 50%)', 'hsl(92, 70%, 50%)', 'hsl(153, 70%, 50%)', 'hsl(153, 70%, 50%)']
 
     // map takscompleted to data
     let tempData = [];
@@ -73,54 +73,16 @@ function formatPieChartData(tasksCompleted, clinicianList) {
             }})
 
             tempData.push({
-                "id": `Dr.${clinician.fname} ${clinician.lname}`,
-                "label": `Dr.${clinician.fname} ${clinician.lname}`,
-                "value": taskValue,
-                "color": colors[i]
+                'id': `Dr.${clinician.fname} ${clinician.lname}`,
+                'label': `Dr.${clinician.fname} ${clinician.lname}`,
+                'value': taskValue,
+                'color': colors[i]
             })
 
         })
-        // console.log("data:", data);
+        
 
         return tempData;
 
     }
 
-// const data = [
-//     {
-//         "id": "Dr. Jant Chan	",
-//         "label": "Dr. Jant Chan",
-//         "value": 4,
-//         "color": "hsl(124, 70%, 50%)"
-//     },
-//     {
-//         "id": "Dr. Zhiyan Hu	",
-//         "label": "Dr. Zhiyan Hu	",
-//         "value": 31,
-//         "color": "hsl(180, 70%, 50%)"
-//     },
-//     {
-//         "id": "Dr. Jiewen Li	",
-//         "label": "Dr. Jiewen Li	",
-//         "value": 25,
-//         "color": "hsl(46, 70%, 50%)"
-//     },
-//     {
-//         "id": "Dr. Olivia Li	",
-//         "label": "Dr. Olivia Li	",
-//         "value": 37,
-//         "color": "hsl(92, 70%, 50%)"
-//     },
-//     {
-//         "id": "Dr. Jingyi You	",
-//         "label": "Dr. Jingyi You",
-//         "value": 26,
-//         "color": "hsl(153, 70%, 50%)"
-//     },
-//     {
-//         "id": "Dr. Kevin Zheng",
-//         "label": "Dr. Kevin Zheng",
-//         "value": 20,
-//         "color": "hsl(153, 70%, 50%)"
-//     }
-// ]

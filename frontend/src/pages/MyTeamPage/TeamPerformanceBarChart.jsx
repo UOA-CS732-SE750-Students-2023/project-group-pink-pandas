@@ -1,5 +1,5 @@
 import { ResponsiveBar } from '@nivo/bar';
-import styles from "./TeamPerformance.module.css";
+import styles from './TeamPerformance.module.css';
 
 
 
@@ -15,7 +15,7 @@ export default function TeamPerformanceBarChart({ completedTasks }) {
 
     }
 
-    console.log("data:", data.length);
+    console.log('data:', data.length);
 
 
 
@@ -31,7 +31,7 @@ export default function TeamPerformanceBarChart({ completedTasks }) {
                     'Discharge',
                     'Other'
                 ]}
-                indexBy="date"
+                indexBy='date'
                 margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
                 padding={0.3}
                 valueScale={{ type: 'linear' }}
@@ -102,9 +102,9 @@ export default function TeamPerformanceBarChart({ completedTasks }) {
                     }
                 ]}
                 animate={false}
-                role="application"
-                ariaLabel="Nivo bar chart demo"
-                barAriaLabel={function (e) { return e.id + ": " + e.formattedValue + " in country: " + e.indexValue }}
+                role='application'
+                ariaLabel='Nivo bar chart demo'
+                barAriaLabel={function (e) { return e.id + ': ' + e.formattedValue + ' in country: ' + e.indexValue }}
             />
         </div>
     )
@@ -122,105 +122,105 @@ function formatBarChartData(tasksCompleted) {
     const fiveDaysAgo = new Date(new Date().setDate(new Date().getDate() - 5)).toLocaleDateString();
     const sixDaysAgo = new Date(new Date().setDate(new Date().getDate() - 6)).toLocaleDateString();
 
-    const lightBlue = "hsl(128, 70%, 50%)";
-    const darkBlue = "hsl(163, 70%, 50%)";
-    const lightGreen = "hsl(211, 70%, 50%)";
-    const darkGreen = "hsl(144, 70%, 50%)";
-    const pink = "hsl(191, 70%, 50%)";
+    const lightBlue = 'hsl(128, 70%, 50%)';
+    const darkBlue = 'hsl(163, 70%, 50%)';
+    const lightGreen = 'hsl(211, 70%, 50%)';
+    const darkGreen = 'hsl(144, 70%, 50%)';
+    const pink = 'hsl(191, 70%, 50%)';
 
 
 
     let data = [
         {
-            "date": `${sixDaysAgo}`,
-            "Blood Test": 0,
-            "bloodTestColor": `${lightBlue}`,
-            "Radiology": 0,
-            "radiologyColor": `${darkBlue}`,
-            "Reviews": 0,
-            "reviewsColor": `${lightGreen}`,
-            "Discharge": 0,
-            "dischargeColor": `${darkGreen}`,
-            "Other": 0,
-            "otherColor": `${pink}`
+            'date': `${sixDaysAgo}`,
+            'Blood Test': 0,
+            'bloodTestColor': `${lightBlue}`,
+            'Radiology': 0,
+            'radiologyColor': `${darkBlue}`,
+            'Reviews': 0,
+            'reviewsColor': `${lightGreen}`,
+            'Discharge': 0,
+            'dischargeColor': `${darkGreen}`,
+            'Other': 0,
+            'otherColor': `${pink}`
         },
         {
-            "date": `${fiveDaysAgo}`,
-            "Blood Test": 0,
-            "bloodTestColor": `${lightBlue}`,
-            "Radiology": 0,
-            "radiologyColor": `${darkBlue}`,
-            "Reviews": 0,
-            "reviewsColor": `${lightGreen}`,
-            "Discharge": 0,
-            "dischargeColor": `${darkGreen}`,
-            "Other": 0,
-            "otherColor": `${pink}`
+            'date': `${fiveDaysAgo}`,
+            'Blood Test': 0,
+            'bloodTestColor': `${lightBlue}`,
+            'Radiology': 0,
+            'radiologyColor': `${darkBlue}`,
+            'Reviews': 0,
+            'reviewsColor': `${lightGreen}`,
+            'Discharge': 0,
+            'dischargeColor': `${darkGreen}`,
+            'Other': 0,
+            'otherColor': `${pink}`
         },
         {
-            "date": `${fourDaysAgo}`,
-            "Blood Test": 0,
-            "bloodTestColor": `${lightBlue}`,
-            "Radiology": 0,
-            "radiologyColor": `${darkBlue}`,
-            "Reviews": 0,
-            "reviewsColor": `${lightGreen}`,
-            "Discharge": 0,
-            "dischargeColor": `${darkGreen}`,
-            "Other": 0,
-            "otherColor": `${pink}`
+            'date': `${fourDaysAgo}`,
+            'Blood Test': 0,
+            'bloodTestColor': `${lightBlue}`,
+            'Radiology': 0,
+            'radiologyColor': `${darkBlue}`,
+            'Reviews': 0,
+            'reviewsColor': `${lightGreen}`,
+            'Discharge': 0,
+            'dischargeColor': `${darkGreen}`,
+            'Other': 0,
+            'otherColor': `${pink}`
         },
         {
-            "date": `${threeDaysAgo}`,
-            "Blood Test": 0,
-            "bloodTestColor": `${lightBlue}`,
-            "Radiology": 0,
-            "radiologyColor": `${darkBlue}`,
-            "Reviews": 0,
-            "reviewsColor": `${lightGreen}`,
-            "Discharge": 0,
-            "dischargeColor": `${darkGreen}`,
-            "Other": 0,
-            "otherColor": `${pink}`
+            'date': `${threeDaysAgo}`,
+            'Blood Test': 0,
+            'bloodTestColor': `${lightBlue}`,
+            'Radiology': 0,
+            'radiologyColor': `${darkBlue}`,
+            'Reviews': 0,
+            'reviewsColor': `${lightGreen}`,
+            'Discharge': 0,
+            'dischargeColor': `${darkGreen}`,
+            'Other': 0,
+            'otherColor': `${pink}`
         },
         {
-            "date": `${twoDaysAgo}`,
-            "Blood Test": 0,
-            "bloodTestColor": `${lightBlue}`,
-            "Radiology": 0,
-            "radiologyColor": `${darkBlue}`,
-            "Reviews": 0,
-            "reviewsColor": `${lightGreen}`,
-            "Discharge": 0,
-            "dischargeColor": `${darkGreen}`,
-            "Other": 0,
-            "otherColor": `${pink}`
+            'date': `${twoDaysAgo}`,
+            'Blood Test': 0,
+            'bloodTestColor': `${lightBlue}`,
+            'Radiology': 0,
+            'radiologyColor': `${darkBlue}`,
+            'Reviews': 0,
+            'reviewsColor': `${lightGreen}`,
+            'Discharge': 0,
+            'dischargeColor': `${darkGreen}`,
+            'Other': 0,
+            'otherColor': `${pink}`
         },
         {
-            "date": `${yesterday}`,
-            "Blood Test": 0,
-            "bloodTestColor": `${lightBlue}`,
-            "Radiology": 0,
-            "radiologyColor": `${darkBlue}`,
-            "Reviews": 0,
-            "reviewsColor": `${lightGreen}`,
-            "Discharge": 0,
-            "dischargeColor": `${darkGreen}`,
-            "Other": 0,
-            "otherColor": `${pink}`
+            'date': `${yesterday}`,
+            'Blood Test': 0,
+            'bloodTestColor': `${lightBlue}`,
+            'Radiology': 0,
+            'radiologyColor': `${darkBlue}`,
+            'Reviews': 0,
+            'reviewsColor': `${lightGreen}`,
+            'Discharge': 0,
+            'dischargeColor': `${darkGreen}`,
+            'Other': 0,
+            'otherColor': `${pink}`
         },
         {
-            "date": `${today}`,
-            "Blood Test": 0,
-            "bloodTestColor": `${lightBlue}`,
-            "Radiology": 0,
-            "radiologyColor": `${darkBlue}`,
-            "Reviews": 0,
-            "reviewsColor": `${lightGreen}`,
-            "Discharge": 0,
-            "dischargeColor": `${darkGreen}`,
-            "Other": 0,
-            "otherColor": `${pink}`
+            'date': `${today}`,
+            'Blood Test': 0,
+            'bloodTestColor': `${lightBlue}`,
+            'Radiology': 0,
+            'radiologyColor': `${darkBlue}`,
+            'Reviews': 0,
+            'reviewsColor': `${lightGreen}`,
+            'Discharge': 0,
+            'dischargeColor': `${darkGreen}`,
+            'Other': 0,
+            'otherColor': `${pink}`
         }
     ]
 
@@ -228,7 +228,7 @@ function formatBarChartData(tasksCompleted) {
         return date1.getDate() == date2.getDate() && date1.getMonth() == date2.getMonth() && date1.getFullYear() == date2.getFullYear();
     }
 
-    const types = ["Blood Test", "Radiology", "Reviews", "Discharge", "Other"];
+    const types = ['Blood Test', 'Radiology', 'Reviews', 'Discharge', 'Other'];
 
     tasksCompleted.map(task => {
         if (!task) return;

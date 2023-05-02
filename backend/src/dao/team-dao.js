@@ -2,7 +2,7 @@ import { Team, User } from '../patientlist-db/schema';
 
 // retrieve team 
 async function retrieveTeam(teamId) {
-    const result = await Team.findOne({ id: teamId });
+    const result = await Team.findOne({ _id: teamId }).populate('clinicians').populate('patients');
     return result;
 }
 
@@ -11,7 +11,7 @@ async function retrieveTeam(teamId) {
 // retrieve patient list from Team collection
 async function retrievePatientList(teamId) {
 
-    const result = await Team.findOne({ id: teamId }, { patients: 1 })
+    const result = await Team.findOne({ _id: teamId }, { patients: 1 })
         .populate('patients');
 
     // console.log(`result: ${await Team.findOne({ id: teamId })}`);
@@ -22,7 +22,7 @@ async function retrievePatientList(teamId) {
 async function retrieveClinicianList(teamId) {
 
 
-    const result = await Team.findOne({ id: teamId }, { clinicians: 1 })
+    const result = await Team.findOne({ _id: teamId }, { clinicians: 1 })
         .populate('clinicians');
     return result.clinicians;
 }

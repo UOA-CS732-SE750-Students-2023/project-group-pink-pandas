@@ -1,8 +1,7 @@
 
 import Typography from '@mui/material/Typography';
 import { Box, Divider, ListItemText, ListItem, List } from '@mui/material';
-// import { useContext } from 'react';
-// import { AppContext } from '../../utils/AppContextProvider';
+
 
 const style = {
     width: '100%',
@@ -12,8 +11,7 @@ const style = {
 
 
 export default function PatientList({patientList}) {
-    // const { patientList, patientListLoading } = useContext(AppContext);
-    // console.log("patientList:", patientList);
+
     if (patientList){
         return (
             <div >

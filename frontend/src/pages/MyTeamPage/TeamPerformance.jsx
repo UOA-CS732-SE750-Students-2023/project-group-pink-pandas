@@ -12,7 +12,6 @@ const style = {
 
 
 export default function TeamPerformance({completedTasks}) {
-    // console.log("completedTasks:", completedTasks);
     return (
         <div >
             <Card >
