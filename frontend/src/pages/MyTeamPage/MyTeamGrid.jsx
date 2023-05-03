@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Paper, Grid, styled, Typography, Divider } from '@mui/material';
+import { Box, Paper, Grid, styled, Typography, Divider, Button } from '@mui/material';
 import PatientList from './PatientList';
 import TeamPerformance from './TeamPerformance';
 import Users from './Users';
@@ -9,68 +9,65 @@ import TeamMemgerTable from './TeamMemberTable.jsx';
 
 
 
-
-
-
 export default function MyTeamGrid() {
 
-    const { team, tasks } = useContext(AppContext);
-
+    const { team, allTeams, tasks, loggedInUser } = useContext(AppContext);
+    const [teamOnDisplay, setTeamOnDisplay] = React.useState(null);
     const [completedTasks, setCompletedTasks] = React.useState(null);
     const [clinicianList, setClinicianList] = React.useState(null);
     const [patientList, setPatientList] = React.useState(null);
-    
-
-
-    if (team) {
-
-        console.log("team: ", team);
-        useEffect(() => {
-
-            setClinicianList(team.clinicians);
-
-            setPatientList(team.patients);
-
-            console.log("team.patients: ", team.patients);
-            console.log("team.clinicians: ", team.clinicians);
-
-        }, [team])
-
-    }
 
 
 
 
     if (tasks && team) {
 
-        const tempTasks = tasks.filter(task => task.status === 2 && task.clinician.team === team._id);    
+        const tempTasks = tasks.filter(task => task.status === 2 && task.clinician.team === team._id);
 
         useEffect(() => {
+            setClinicianList(team.clinicians);
+
+            setPatientList(team.patients);
+            setTeamOnDisplay(team);
             setCompletedTasks(tempTasks);
-    
-        },[tasks])
+
+        }, [tasks, team])
 
     }
 
 
-    if (team) {
+    if (teamOnDisplay) {
         return (
-            
+
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={8}>
-                    <Grid container item xs={12} md={4} spacing={3} mt={10}>
 
-                        <Grid item xs={12} md={12}>
+                    {loggedInUser.isAdmin && allTeams ?
+                        < ShowAllTeams
+                            teamOnDisplay={teamOnDisplay}
+                            setTeamOnDisplay={setTeamOnDisplay}
+                            allTeams={allTeams}
+                            setClinicianList={setClinicianList}
+                            setPatientList={setPatientList}
+                            setCompletedTasks={setCompletedTasks}
+                            tasks={tasks}
+                        /> :
+                        null}
+
+
+                    <Grid container item xs={12} md={4} spacing={3} mt={0}>
+
+                        <Grid item xs={12} md={12} >
                             <PatientList patientList={patientList} />
                         </Grid>
 
                     </Grid>
-                    <Grid container item xs={12} md={8} spacing={3} mt={10}   >
+                    <Grid container item xs={12} md={8} spacing={3} mt={0}   >
 
                         <Grid item xs={12} md={12}>
 
                             <Typography gutterBottom variant="h5" component="div">
-                                {team.name} Team Details
+                                {teamOnDisplay.name} Team Details
                             </Typography>
                             <Divider />
 
@@ -82,10 +79,8 @@ export default function MyTeamGrid() {
                             <TeamPerformance completedTasks={completedTasks} />
                         </Grid>
                         <Grid item xs={12} md={12}>
-                            <Users completedTasks={completedTasks} clinicianList={clinicianList}  />
+                            <Users completedTasks={completedTasks} clinicianList={clinicianList} />
                         </Grid>
-
-
 
                     </Grid>
 
@@ -95,6 +90,38 @@ export default function MyTeamGrid() {
             </Box>
         );
     }
+}
+
+
+function ShowAllTeams({ teamOnDisplay, setTeamOnDisplay, allTeams, setClinicianList, setPatientList, tasks, setCompletedTasks }) {
+
+
+    return (
+        <Grid item xs={12} md={12} mt={2} >
+
+            {allTeams.map((team) => (
+                
+                <Button variant={teamOnDisplay._id == team._id ? "contained" : "outlined"} key={team._id} sx={{ m: 1 }} 
+                    onClick={() => {
+
+                        setTeamOnDisplay(team);
+                        setClinicianList(team.clinicians);
+                        setPatientList(team.patients);
+
+                        const tempTasks = tasks.filter(task => task.status === 2 && task.clinician.team === team._id);
+                        setCompletedTasks(tempTasks);
+
+
+
+                    }}
+                >
+                    {team.name}
+                </Button>
+            ))}
+
+        </Grid>
+    )
+
 }
 
 

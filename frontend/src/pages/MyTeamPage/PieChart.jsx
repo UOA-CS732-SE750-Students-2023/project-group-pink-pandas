@@ -13,7 +13,7 @@ export default function PieChart({ completedTasks, clinicianList }) {
         data = formatPieChartData(completedTasks, clinicianList);
     }
 
-    console.log('data:', data);
+    // console.log('data:', data);
 
 
     return (
