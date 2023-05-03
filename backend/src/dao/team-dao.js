@@ -6,7 +6,11 @@ async function retrieveTeam(teamId) {
     return result;
 }
 
-
+// retrieve all teams
+async function retrieveAllTeams() {
+    const result = await Team.find({}).populate('clinicians').populate('patients');
+    return result;
+}
 
 // retrieve patient list from Team collection
 async function retrievePatientList(teamId) {
@@ -32,6 +36,7 @@ async function retrieveClinicianList(teamId) {
 
 export {
     retrieveTeam,
+    retrieveAllTeams,
     retrievePatientList,
     retrieveClinicianList
 };

@@ -1,6 +1,7 @@
 
 import Typography from '@mui/material/Typography';
 import { Box, Divider, ListItemText, ListItem, List } from '@mui/material';
+import { useNavigate } from "react-router"
 
 
 const style = {
@@ -10,9 +11,10 @@ const style = {
 };
 
 
-export default function PatientList({patientList}) {
+export default function PatientList({ patientList }) {
+    const navigate = useNavigate();
 
-    if (patientList){
+    if (patientList) {
         return (
             <div >
                 <Box sx={{ mx: 'auto', px: 5 }}>
@@ -20,17 +22,15 @@ export default function PatientList({patientList}) {
                         Patients
                     </Typography>
                     <Divider />
-    
+
                     <List sx={style} component="nav" aria-label="mailbox folders">
-    
+
                         {patientList.map((patient, index) => (
-                            <ListItem button
-                                key={index}
+                            <ListItem button 
+                            key={index} 
+                            onClick={() => {navigate(`/patientdetails/${patient._id}`)}}
                             >
-                                <ListItemText
-                                    primary={patient.fname + " " + patient.lname}
-    
-                                />
+                                <ListItemText primary={patient.fname + " " + patient.lname} />
                             </ListItem>
                         ))}
                     </List>

@@ -10,8 +10,10 @@ export const AppContext = React.createContext({
   notifications: [],
   tasks: [],
   tasksCompleted: [],
+
   // patientList: [],
   // clinicianList: [],
+  allTeams: [],
   team: [],
   userProfile: {},
   unreadNotification: [],
@@ -20,7 +22,6 @@ export const AppContext = React.createContext({
 export function AppContextProvider({ children }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState(null);
-
   const [clinicianId, setClinicianId] = useState(null);
 
   useEffect(() => {
@@ -204,6 +205,12 @@ export function AppContextProvider({ children }) {
 } = useGet(loggedInUser?`${API_BASE_URL}/api/team/${loggedInUser.team}`: [], []);
 
 
+  const {
+    data: allTeams,
+    isLoading: allTeamsLoading,
+    refresh: refreshAllTeams,
+  } = useGet(loggedInUser && loggedInUser.isAdmin?`${API_BASE_URL}/api/team`: [], []);
+
   async function createContainer(id, container_id) {
     await axios.put(`${API_BASE_URL}/api/patient/${id}`, { container: container_id });
   }
@@ -261,6 +268,8 @@ export function AppContextProvider({ children }) {
     // clinicianListLoading,
     team,
     teamLoading,
+    allTeams,
+    allTeamsLoading,
     userProfile,
     userProfileLoading,
     updateUserProfile,
