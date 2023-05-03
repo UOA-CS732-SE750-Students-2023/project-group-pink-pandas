@@ -11,8 +11,8 @@ export const AppContext = React.createContext({
   tasks: [],
   tasksCompleted: [],
 
-  // patientList: [],
-  // clinicianList: [],
+  patientList: [],
+  clinicianList: [],
   allTeams: [],
   team: [],
   userProfile: {},
@@ -191,11 +191,11 @@ export function AppContextProvider({ children }) {
 
   }
 
-//   const {
-//     data: patientList,
-//     isLoading: patientListLoading,
-//     refresh: refreshPatientList,
-// } = useGet(loggedInUser?`${API_BASE_URL}/api/team/${loggedInUser.team}/patient_list`: [], []);
+  const {
+    data: patientList,
+    isLoading: patientListLoading,
+    refresh: refreshPatientList,
+} = useGet(loggedInUser?`${API_BASE_URL}/api/team/${loggedInUser.team}/patient_list`: [], []);
 
 
   const {
@@ -262,8 +262,8 @@ export function AppContextProvider({ children }) {
     tasks,
     tasksLoading,
     tasksCompleted,
-    // patientList,
-    // patientListLoading,
+    patientList,
+    patientListLoading,
     // clinicianList,
     // clinicianListLoading,
     team,
