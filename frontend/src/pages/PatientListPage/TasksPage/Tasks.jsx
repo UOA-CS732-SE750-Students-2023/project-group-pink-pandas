@@ -50,8 +50,12 @@ export default function Tasks() {
     useEffect(() => {
         async function getTeamsTasks() {
             const teamTasks = [];
-            // retrive all patients from team 1 for testing
-            const { data } = await axios.get(`${API_BASE_URL}/api/team/1/patient_list`);
+
+            // // retrive all patients from team 1 for testing
+            // const { data } = await axios.get(`${API_BASE_URL}/api/team/1/patient_list`);
+
+            // Todo: replace hardcoded id with logged in user's team id
+            const { data } = await axios.get(`${API_BASE_URL}/api/team/6452c95f4cd205a5f134935b/patient_list`);
 
             for (const patient of data) {
                 const { data } = await axios.get(`${API_BASE_URL}/api/task/patient/${patient._id}`);
