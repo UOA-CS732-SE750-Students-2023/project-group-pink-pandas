@@ -55,7 +55,7 @@ export default function Tasks() {
             // const { data } = await axios.get(`${API_BASE_URL}/api/team/1/patient_list`);
 
             // Todo: replace hardcoded id with logged in user's team id
-            const { data } = await axios.get(`${API_BASE_URL}/api/team/6452c95f4cd205a5f134935b/patient_list`);
+            const { data } = await axios.get(`${API_BASE_URL}/api/team/6452d16cf4639335502723b1/patient_list`);
 
             for (const patient of data) {
                 const { data } = await axios.get(`${API_BASE_URL}/api/task/patient/${patient._id}`);
