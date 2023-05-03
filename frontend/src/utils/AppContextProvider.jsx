@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import useGet from "../hooks/useGet";
 import useGetUser from "../hooks/useGetUser";
+import { logoutUser } from "../api/user";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "";
 
@@ -20,6 +21,7 @@ export const AppContext = React.createContext({
 });
 
 export function AppContextProvider({ children }) {
+
   const [loggedIn, setLoggedIn] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [clinicianId, setClinicianId] = useState(null);
@@ -32,6 +34,15 @@ export function AppContextProvider({ children }) {
     }
   }, [loggedInUser]);
 
+  useEffect(() => {
+    const savedUser = sessionStorage.getItem('loggedInUser');
+
+    if (savedUser) {
+      setLoggedInUser(JSON.parse(savedUser));
+      setLoggedIn(true);
+    }
+  }, []);
+  
 
   const {
     data: notification,
