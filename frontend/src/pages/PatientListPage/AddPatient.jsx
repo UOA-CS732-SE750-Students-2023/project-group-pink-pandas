@@ -1,4 +1,4 @@
-import { useState, React, useEffect } from 'react';
+import { useState, React, useEffect, useContext } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { FormControl, FormGroup, FormLabel,FormControlLabel,Radio, RadioGroup, Switch, Button, Select, MenuItem, InputLabel, Checkbox} from '@mui/material';
@@ -6,6 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import axios from 'axios';
+import { AppContext } from '../../utils/AppContextProvider';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '';
 
@@ -15,11 +16,12 @@ export default function AddPatient(){
   const [location, setLocation] = useState('');
   const [dob, setDob] = useState('');
   const [clinicians, setClinicians] = useState([]);
+  const { addPatientProvider } = useContext(AppContext);
 
   useEffect(() => {
     async function getClinicians() {
       // should pass in userID instead
-      const { data } = await axios.get(`${API_BASE_URL}/api/patient/supervisors/644f4559ac0b8e7ad2933bab`);
+      const { data } = await axios.get(`${API_BASE_URL}/api/patient/supervisors/6452ceef1fa8a63449499ef4`);
       let renderClinicians = [];
       for(const c of data) {
         const name = `${c.fname} ${c.lname}`
@@ -45,8 +47,9 @@ export default function AddPatient(){
       birth_date: dob,
       gender: gender,
     };
-    await axios.post(`${API_BASE_URL}/api/patient/add`, data)
-            .then(console.log(data));
+    // await axios.post(`${API_BASE_URL}/api/patient/add`, data)
+    //         .then(console.log(data));
+    addPatientProvider(data)
   }
   
   function onGenderChange(e) {

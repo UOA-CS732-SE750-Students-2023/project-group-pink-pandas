@@ -235,7 +235,7 @@ export function AppContextProvider({ children }) {
 
 
   async function readNotification(id) {
-    console.log(id);
+    // console.log(id);
     const updateResponse = await axios.put(
       `${API_BASE_URL}/api/notification/unread/${id}`
     );
@@ -244,6 +244,14 @@ export function AppContextProvider({ children }) {
 
     refreshUnreadNotifications();
     refreshNotifications();
+  }
+
+  async function addPatientProvider(data){
+    const postResponse= await axios.post(`${API_BASE_URL}/api/patient/add`, data);
+    console.log(postResponse);
+    
+    refreshNotifications();
+    refreshUnreadNotifications();
   }
 
   async function updateUserProfile(id, data) {
@@ -297,6 +305,7 @@ export function AppContextProvider({ children }) {
     claimTask,
     loggedInUser,
     setLoggedInUser,
+    addPatientProvider
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
