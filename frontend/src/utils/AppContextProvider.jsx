@@ -11,9 +11,11 @@ export const AppContext = React.createContext({
   notifications: [],
   tasks: [],
   tasksCompleted: [],
+
   patientList: [],
   clinicianList: [],
-  team: {},
+  allTeams: [],
+  team: [],
   userProfile: {},
   unreadNotification: [],
 });
@@ -22,12 +24,12 @@ export function AppContextProvider({ children }) {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState(null);
-
   const [clinicianId, setClinicianId] = useState(null);
 
   useEffect(() => {
     if (loggedInUser) {
       console.log("loggedInUser:", loggedInUser);
+      
       setClinicianId(loggedInUser._id);
     }
   }, [loggedInUser]);
@@ -204,20 +206,21 @@ export function AppContextProvider({ children }) {
     data: patientList,
     isLoading: patientListLoading,
     refresh: refreshPatientList,
-  } = useGet(`${API_BASE_URL}/api/team/1/patient_list`, []);
+} = useGet(loggedInUser?`${API_BASE_URL}/api/team/${loggedInUser.team}/patient_list`: [], []);
 
-  const {
-    data: clinicianList,
-    isLoading: clinicianListLoading,
-    refresh: refreshClinicianList,
-  } = useGet(`${API_BASE_URL}/api/team/1/clinician_list`, []);
 
   const {
     data: team,
     isLoading: teamLoading,
     refresh: refreshTeam,
-  } = useGet(`${API_BASE_URL}/api/team/1`, []);
+} = useGet(loggedInUser?`${API_BASE_URL}/api/team/${loggedInUser.team}`: [], []);
 
+
+  const {
+    data: allTeams,
+    isLoading: allTeamsLoading,
+    refresh: refreshAllTeams,
+  } = useGet(loggedInUser && loggedInUser.isAdmin?`${API_BASE_URL}/api/team`: [], []);
 
   async function createContainer(id, container_id) {
     await axios.put(`${API_BASE_URL}/api/patient/${id}`, { container: container_id });
@@ -272,10 +275,12 @@ export function AppContextProvider({ children }) {
     tasksCompleted,
     patientList,
     patientListLoading,
-    clinicianList,
-    clinicianListLoading,
+    // clinicianList,
+    // clinicianListLoading,
     team,
     teamLoading,
+    allTeams,
+    allTeamsLoading,
     userProfile,
     userProfileLoading,
     updateUserProfile,
