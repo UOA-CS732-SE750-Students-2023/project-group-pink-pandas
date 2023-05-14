@@ -26,7 +26,13 @@ function useSharedString(container_id, patient_id) {
 
   const getFluidData = async () => {
     // Configuring fluid container.
-    const client = new TinyliciousClient();
+    // const client = new TinyliciousClient();
+    const client = new TinyliciousClient({
+      connection: {
+        domain: "http://doctordolist.online",
+        port: 8081,
+      }
+    });
     const containerSchema = {
       initialObjects: {
         sharedString: SharedString

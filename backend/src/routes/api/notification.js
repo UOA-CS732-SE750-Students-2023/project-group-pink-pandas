@@ -21,11 +21,11 @@ router.get('/:clinicianId',authenticate, async(req,res)=>{
     const { clinicianId } = req.params;
 
     const notifications = await retrieveUserOfNotification(clinicianId);
-
+    
     if (notifications){
         return res.json(notifications)
     } else{
-        return sendStatus(HTTP_NOT_FOUND)
+        return res.sendStatus(HTTP_NOT_FOUND)
     }
 });
 
